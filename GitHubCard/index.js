@@ -77,10 +77,27 @@ function newCard(data){
   const bio = document.createElement('p');
 
   card.classList.add('card');
+  img.src = data.avatar_url;
   cardInfo.classList.add('class-list');
   name.classList.add('name');
   username.classList.add('username');
+  username.textContent = data.login;
+  location.textContent = data.location;
+  profile.textContent = 'Profile:';
+  address.href = data.url;
+  address.textContent = data.url;
 
-  
+
+  card.appendChild(img);
+  img.appendChild(cardInfo);
+  cardInfo.appendChild(name);
+  cardInfo.appendChild(username);
+  cardInfo.appendChild(location);
+  cardInfo.appendChild(profile);
+  profile.appendChild(address);
+  cardInfo.appendChild(followers);
+  cardInfo.appendChild(following);
+  cardInfo.appendChild(bio);
+
 
 }
