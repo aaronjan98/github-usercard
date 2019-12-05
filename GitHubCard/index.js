@@ -3,14 +3,7 @@
            https://api.github.com/users/<your name>
 */
 
-axios.get("https://api.github.com/users/aaronjan98")
-.then(response => {
-  console.log(response);
-  // response.data.message.forEach(item => {
-  //   const newDog = DogCard(item);
-  //   entryPoint.appendChild(newDog);
-  // });
-})
+
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -80,16 +73,20 @@ function newCard(data){
   img.src = data.avatar_url;
   cardInfo.classList.add('class-list');
   name.classList.add('name');
+  name.textContent = data.name;
   username.classList.add('username');
   username.textContent = data.login;
-  location.textContent = data.location;
+  location.textContent = `Location: ${data.location}`;
   profile.textContent = 'Profile:';
   address.href = data.url;
   address.textContent = data.url;
+  followers.textContent = `Followers: ${data.followers}`;
+  following.textContent = `Following: ${data.following}`;
+  bio.textContent = `Bio: ${data.bio}`;
 
 
   card.appendChild(img);
-  img.appendChild(cardInfo);
+  card.appendChild(cardInfo);
   cardInfo.appendChild(name);
   cardInfo.appendChild(username);
   cardInfo.appendChild(location);
@@ -99,5 +96,15 @@ function newCard(data){
   cardInfo.appendChild(following);
   cardInfo.appendChild(bio);
 
-
+  return card;
 }
+
+const cards = document.querySelector('.cards');
+
+axios.get("https://api.github.com/users/aaronjan98")
+.then(response => {
+   console.log(response);
+  //  newCard(response.data);
+  //  const newProfile = newCard(response.data);
+   cards.appendChild(newCard(response.data));   
+})
